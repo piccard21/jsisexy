@@ -3,6 +3,8 @@ define([
     'underscore',
     'c01',
     'c02',
+    'c03',
+    'oo',
 ], function ($, _) {
 
     var initialize = function () {

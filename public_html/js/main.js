@@ -4,6 +4,8 @@ require.config({
         underscore: 'libs/underscore/underscore',
         c01: "chapters/01",
         c02: "chapters/02",
+        c03: "chapters/03",
+        oo: "chapters/oo",
     }
 });
 

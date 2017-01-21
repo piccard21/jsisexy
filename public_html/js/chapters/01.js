@@ -1,11 +1,9 @@
 define([], function ($, _) { 
     JSSEXY.c01 = function () {
-
-        //
-        //
+ 
         //
         //------------------------------------------------------------------------------------------------
-//
+        //
 //Property names can be a string or a number, 
 //but if the property name is a number, 
 //it has to be accessed with the bracket notation.
