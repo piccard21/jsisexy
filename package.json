@@ -1,8 +1,17 @@
 {
-    "name": "javascriptissexy",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "piccard",
-    "contributors": [],
-    "dependencies": {}
+  "name": "javascriptissexy",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "piccard",
+  "contributors": [],
+  "dependencies": {
+    "requirejs": "^2.3.2",
+    "underscore": "^1.8.3"
+  }
 }

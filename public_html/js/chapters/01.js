@@ -1,8 +1,4 @@
-
-
-$(function () {
-
-
+define([], function ($, _) { 
     JSSEXY.c01 = function () {
 
         //
@@ -119,10 +115,10 @@ $(function () {
         }
 
         mangoFruit = new Fruit("Yellow", 8, "Mango", ["South America", "Central America", "West Africa"]);
-        
-                console.log(mangoFruit);
-                console.log(mangoFruit.color);
-                
+
+        console.log(mangoFruit);
+        console.log(mangoFruit.color);
+
         mangoFruit.showName(); // This is a Mango.​
         mangoFruit.nativeTo();
         //Grown in:South America​
@@ -224,8 +220,8 @@ $(function () {
 
 // Create a new school object with 3 own properties: schoolName, schoolAccredited, and schoolLocation.​
         var school = {
-            schoolName: "MIT", 
-            schoolAccredited: true, 
+            schoolName: "MIT",
+            schoolAccredited: true,
             schoolLocation: "Massachusetts"
         };
 
@@ -242,7 +238,7 @@ $(function () {
 //Accessing Inherited Properties
 //Properties inherited from Object.prototype are not enumerable, so the for/in loop does not show them.  
 // Create a new HigherLearning function that the school object will inherit from.​
- 
+
         function HigherLearning() {
             this.educationLevel = "University";
         }
@@ -258,7 +254,7 @@ $(function () {
         for (var eachItem in school) {
             console.log(eachItem); // Prints educationLevel, schoolName, schoolAccredited, and schoolLocation​
         }
-console.info(school);
+        console.info(school);
 
 
 
@@ -279,20 +275,20 @@ console.info(school);
 
 
 
-var christmasList = {mike:"Book", jason:"sweater" }
-delete christmasList.mike; // deletes the mike property​
+        var christmasList = {mike: "Book", jason: "sweater"}
+        delete christmasList.mike; // deletes the mike property​
 
-for (var people in christmasList) {
-	console.log(people);
-}
+        for (var people in christmasList) {
+            console.log(people);
+        }
 // Prints only jason​
 // ​// The mike property was deleted​
 
 
-delete christmasList.toString; // returns true, but toString not deleted because it is an inherited method​
+        delete christmasList.toString; // returns true, but toString not deleted because it is an inherited method​
 
 // Here we call the toString method and it works just fine—wasn’t deleted ​
-christmasList.toString(); //"[object Object]"​
+        christmasList.toString(); //"[object Object]"​
 
 // You can delete a property of an instance if the property is an own property of that instance. 
 // For example, we can delete the educationLevel property from the school's object 
@@ -302,34 +298,35 @@ christmasList.toString(); //"[object Object]"​
 // we used the "this" keyword to define the property when we declare the HigherLearning function. 
 // We did not define the educationLevel property on the HigherLearning function's prototype.​
 
-console.log(school.hasOwnProperty("educationLevel")); 
+        console.log(school.hasOwnProperty("educationLevel"));
 // educationLevel is an own property on school, so we can delete it​
 
 
-delete school.educationLevel; true 
+        delete school.educationLevel;
+        true
 
 // The educationLevel property was deleted from the school instance​
-console.log(school.educationLevel);  
+        console.log(school.educationLevel);
 
 
 
 // But the educationLevel property is still on the HigherLearning function​
 
-var newSchool = new HigherLearning ();
-console.log(newSchool.educationLevel); // University​
+        var newSchool = new HigherLearning();
+        console.log(newSchool.educationLevel); // University​
 
 // If we had defined a property on the HigherLearning function's prototype, such as this educationLevel2 property:​
-HigherLearning.prototype.educationLevel2 = "University 2";
+        HigherLearning.prototype.educationLevel2 = "University 2";
 
 // Then the educationLevel2 property on the instances of HigherLearning would not be own property. ​
 
 // The educationLevel2 property is not an own property on the school instance​
-console.log(school.hasOwnProperty("educationLevel2")); 
-console.log(school.educationLevel2); // 
+        console.log(school.hasOwnProperty("educationLevel2"));
+        console.log(school.educationLevel2); // 
 
 
 // Let's try to delete the inherited educationLevel2 property​ 
-delete school.educationLevel2;  
+        delete school.educationLevel2;
 
 // The inherited educationLevel2 property was not deleted​
 // console.log(school.educationLevel2); 
@@ -344,13 +341,13 @@ delete school.educationLevel2;
 //(by Douglas Crockford) to get the JSON.stringify function. 
 //It is now standardized in ECMAScript 5.
 
-var christmasList = {mike:"Book", jason:"sweater", chelsea:"iPad" }
-JSON.stringify (christmasList);
+        var christmasList = {mike: "Book", jason: "sweater", chelsea: "iPad"}
+        JSON.stringify(christmasList);
 // Prints this string:​
 // "{"mike":"Book","jason":"sweater","chels":"iPad"}"  
 
 // To print a stringified object with formatting, add "null" and "4" as parameters:​
-JSON.stringify (christmasList, null, 4);
+        JSON.stringify(christmasList, null, 4);
 // "{
 //    "mike": "Book",
 //    "jason": "sweater",
@@ -358,17 +355,19 @@ JSON.stringify (christmasList, null, 4);
 //}"
 //​
 // JSON.parse Examples \\​
- // The following is a JSON string, so we cannot access the properties with dot notation (like christmasListStr.mike)​
-var christmasListStr = '{"mike":"Book","jason":"sweater","chels":"iPad"}';
+        // The following is a JSON string, so we cannot access the properties with dot notation (like christmasListStr.mike)​
+                var christmasListStr = '{"mike":"Book","jason":"sweater","chels":"iPad"}';
 
 // Let’s convert it to an object​
 
-var christmasListObj = JSON.parse (christmasListStr); 
+        var christmasListObj = JSON.parse(christmasListStr);
 
 // Now that it is an object, we use dot notation​
-console.log(christmasListObj.mike); // Book
+        console.log(christmasListObj.mike); // Book
 
 
 //+++++
     }
-})
+
+
+}); 

@@ -1,20 +1,24 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+define([
+    'jquery',
+    'underscore',
+    'c01',
+    'c02',
+], function ($, _) {
 
-var JSSEXY = {};
+    var initialize = function () {
 
-$(function () {
+        $('.chapters li a').click(function (e) {
+            e.preventDefault();
 
-    $('.chapters li a').click(function (e) {
-        e.preventDefault(); 
+            // call JS
+            JSSEXY[$(this).data("chapter")]();
 
-        // call JS
-        JSSEXY[$(this).data("chapter")](); 
-        
-        // open js-sexy-page
-        window.open($(e.currentTarget).attr('href'), '_blank');
-    });
-});
+            // open js-sexy-page
+            window.open($(e.currentTarget).attr('href'), '_blank');
+        });
+    }
+
+    return {
+        initialize: initialize
+    };
+}); 
