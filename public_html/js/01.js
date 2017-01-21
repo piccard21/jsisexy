@@ -302,9 +302,8 @@ christmasList.toString(); //"[object Object]"​
 // we used the "this" keyword to define the property when we declare the HigherLearning function. 
 // We did not define the educationLevel property on the HigherLearning function's prototype.​
 
-console.log(school.hasOwnProperty("educationLevel")); true​
+console.log(school.hasOwnProperty("educationLevel")); 
 // educationLevel is an own property on school, so we can delete it​
-
 
 
 delete school.educationLevel; true 
@@ -325,8 +324,8 @@ HigherLearning.prototype.educationLevel2 = "University 2";
 // Then the educationLevel2 property on the instances of HigherLearning would not be own property. ​
 
 // The educationLevel2 property is not an own property on the school instance​
-console.log(school.hasOwnProperty("educationLevel2")); false​
-console.log(school.educationLevel2); // University 2​
+console.log(school.hasOwnProperty("educationLevel2")); 
+console.log(school.educationLevel2); // 
 
 
 // Let's try to delete the inherited educationLevel2 property​ 

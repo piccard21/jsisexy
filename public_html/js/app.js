@@ -10,7 +10,7 @@ $(function () {
 
     $('.chapters li a').click(function (e) {
         e.preventDefault(); 
-        
+
         // call JS
         JSSEXY[$(this).data("chapter")](); 
         
