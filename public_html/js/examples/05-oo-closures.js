@@ -157,7 +157,7 @@ define([], function ($, _) {
         Function.prototype.bind = function () {
             var method = this;
             var args = Array.prototype.slice.call(arguments);
-            var object = args.shift(); 
+            var object = args.shift();
             return function () {
                 return method.apply(object, args);
             };
@@ -218,5 +218,55 @@ define([], function ($, _) {
 
 
 
+        // --- Closures Gone Awry
+
+        // i in Funktion ist Referenz und kann daher nicht so benutzt werden!!!
+        function celebrityIDCreator(theCelebrities) {
+            var i;
+            var uniqueID = 100;
+            for (i = 0; i < theCelebrities.length; i++) {
+                theCelebrities[i]["id"] = function () {
+                    return uniqueID + i;
+                }
+            }
+
+            return theCelebrities;
+        }
+
+        var actionCelebs = [{name: "Stallone", id: 0}, {name: "Cruise", id: 0}, {name: "Willis", id: 0}];
+        var createIdForActionCelebs = celebrityIDCreator(actionCelebs);
+        var stalloneID = createIdForActionCelebs[0];
+        console.log(stalloneID.id); // 103
+
+
+        // LÖSUNG
+        function celebrityIDCreator(theCelebrities) {
+            var i;
+            var uniqueID = 100;
+            for (i = 0; i < theCelebrities.length; i++) {
+                // the j parametric variable is the i passed in on invocation of this IIFE​
+                theCelebrities[i]["id"] = function (j) { 
+                    return function () {
+                        // each iteration of the for loop passes the current value of i into this IIFE and it saves the correct value to the array​
+                        return uniqueID + j; 
+                        // BY adding () at the end of this function, we are executing it immediately and returning just the value of uniqueID + j, 
+                        // instead of returning a function.​
+                    }() 
+                }(i); // immediately invoke the function passing the i variable as a parameter​
+            }
+
+            return theCelebrities;
+        }
+ 
+
+        createIdForActionCelebs = celebrityIDCreator(actionCelebs);
+        console.log(createIdForActionCelebs);  
+
+        var stalloneID = createIdForActionCelebs[0];
+        console.log(stalloneID);  
+        console.log(stalloneID.id); // 100​
+
+        var cruiseID = createIdForActionCelebs [1];
+        console.log(cruiseID.id); // 101
     }
 });
