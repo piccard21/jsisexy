@@ -12,6 +12,7 @@ require.config({
         e04: "examples/04-oo-this",
         e05: "examples/05-oo-closures",
         e06: "examples/06-oo-vererbung",
+        e07: "examples/07-oo-callbacks",
     }
 });
 
