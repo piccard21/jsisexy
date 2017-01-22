@@ -6,6 +6,9 @@ require.config({
         c02: "chapters/02",
         c03: "chapters/03",
         oo: "chapters/oo",
+        e01: "examples/01-oo-class",
+        e02: "examples/02-oo-overwriting",
+        e03: "examples/03-oo-kapselung",
     }
 });
 
