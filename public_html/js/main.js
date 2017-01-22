@@ -11,6 +11,7 @@ require.config({
         e03: "examples/03-oo-kapselung",
         e04: "examples/04-oo-this",
         e05: "examples/05-oo-closures",
+        e06: "examples/06-oo-vererbung",
     }
 });
 

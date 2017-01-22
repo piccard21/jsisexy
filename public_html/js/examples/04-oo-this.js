@@ -87,10 +87,50 @@ define([], function ($, _) {
         };
         var instanz = new Konstruktor();
         instanz.start();
-        
-        
-        
+
+
+
         // Lösung: s. Closure
-        
+        /*
+         * Die Methode in der Klasse hat natürlich vollen Zugriff auf alles was drinnen so abläuft, 
+         * d.h ich kann auf alle Eigenschaften und Methoden zugreifen. 
+         * Die Methode außerhalb der Klasse kann lediglich auf öffentliche Eigenschaften und Methoden zugreifen. 
+         */
+
+
+        function Car() {
+
+            // öffentliche Eigenschaft
+            this.CarName = "Audi";
+            // private Eigenschaft
+            var CarColor = "Black";
+
+            // private Methode
+            var setCarColor = function (newCarColor) { 
+                CarColor = newCarColor; 
+            }
+
+            // privilegierte öffentliche Methode
+            this.getCarInfosInside = function () { 
+                setCarColor('Green');
+                console.info("CarName:" + this.CarName + " CarColor:" + CarColor); 
+            }
+
+        }
+
+        // nicht-privilegierte öffentliche Methode
+        Car.prototype.getCarInfosOutside = function () { 
+            setCarColor('Green');
+            console.info("CarName:" + this.CarName + " CarColor:" + CarColor);
+
+        }
+
+        var Audi = new Car();
+        // Liefert "Audi" und "Green"
+        Audi.getCarInfosInside(); 
+        // Liefert "setCarColor" is not defined, "Audi" und "undefined"
+//        Audi.getCarInfosOutside(); 
+
+
     }
 });
