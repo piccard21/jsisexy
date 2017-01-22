@@ -20,7 +20,7 @@
  * oftmals keinen spezifischen Kontext, sodass this als Fallback auf window zeigt.
  */
 
-define([], function ($, _) {
+define(['jquery', 'underscore'], function ($, _) {
     JSSEXY.e04_oo_this = function () {
 
         // easy
@@ -106,20 +106,20 @@ define([], function ($, _) {
             var CarColor = "Black";
 
             // private Methode
-            var setCarColor = function (newCarColor) { 
-                CarColor = newCarColor; 
+            var setCarColor = function (newCarColor) {
+                CarColor = newCarColor;
             }
 
             // privilegierte öffentliche Methode
-            this.getCarInfosInside = function () { 
+            this.getCarInfosInside = function () {
                 setCarColor('Green');
-                console.info("CarName:" + this.CarName + " CarColor:" + CarColor); 
+                console.info("CarName:" + this.CarName + " CarColor:" + CarColor);
             }
 
         }
 
         // nicht-privilegierte öffentliche Methode
-        Car.prototype.getCarInfosOutside = function () { 
+        Car.prototype.getCarInfosOutside = function () {
             setCarColor('Green');
             console.info("CarName:" + this.CarName + " CarColor:" + CarColor);
 
@@ -127,9 +127,128 @@ define([], function ($, _) {
 
         var Audi = new Car();
         // Liefert "Audi" und "Green"
-        Audi.getCarInfosInside(); 
+        Audi.getCarInfosInside();
         // Liefert "setCarColor" is not defined, "Audi" und "undefined"
 //        Audi.getCarInfosOutside(); 
+
+
+
+
+
+        // --------------------------------------------------------------------------------
+        //
+
+        // ---- Fix this when used in a method passed as a callback
+        // We have a simple object with a clickHandler method that we want to use when a button on the page is clicked​
+        var user = {
+            tournament: "The Masters",
+            data: [
+                {name: "T. Woods", age: 37},
+                {name: "P. Mickelson", age: 43}
+            ],
+            clickHandler: function (event) {
+                var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1​
+
+                // This line is printing a random person's name and age from the data array​
+                console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+            },
+            clickHandler2: function () {
+                // To capture the value of "this" when it refers to the user object, we have to set it to another variable here:​
+                // We set the value of "this" to theUserObj variable, so we can use it later​
+                var theUserObj = this;
+
+                // the use of this.data here is fine, because "this" refers to the user object, and data is a property on the user object.​
+                this.data.forEach(function (person) {
+                    // But here inside the anonymous function (that we pass to the forEach method), "this" no longer refers to the user object.​
+                    // This inner function cannot access the outer function's "this"​
+
+                    console.log("What is This referring to? " + theUserObj); //[object Window]​
+
+                    console.log(person.name + " is playing at " + theUserObj.tournament);
+                    // T. Woods is playing at undefined​
+                    // P. Mickelson is playing at undefined​
+                })
+            },
+            showData: function (event) {
+                var randomNum = ((Math.random() * 2 | 0) + 1) - 1; // random number between 0 and 1​
+
+                // This line is adding a random person from the data array to the text field​
+                console.log(this.data[randomNum].name + " " + this.data[randomNum].age);
+            }
+
+        }
+
+
+        // The button is wrapped inside a jQuery $ wrapper, so it is now a jQuery object​
+        // And the output will be undefined because there is no data property on the button object​
+//        $("button").click(user.clickHandler); // Cannot read property '0' of undefined
+
+        $("#button1").click(user.clickHandler.bind(user)); // P. Mickelson 43
+
+
+
+
+
+
+        // ---- Fix this inside closure 
+        user.clickHandler2();
+
+        // ---- Fix this when method is assigned to a variable
+
+        // Assign the user.showData to a variable​
+        var showUserData = user.showData;
+        // When we execute the showUserData function, the values printed to the
+        // console are from the global data array, not from the data array in the user object​
+
+        // showUserData(); // Samantha 12 (from the global data array)​
+        // Bind the showData method to the user object​
+        var showUserData = user.showData.bind(user);
+
+        // Now we get the value from the user object, because the <em>this</em> keyword is bound to the user object​
+        showUserData(); // P. Mickelson 43
+
+
+
+
+
+
+        // ---- Fix this when borrowing methods 
+
+        var gameController = {
+            scores: [20, 34, 55, 46, 77],
+            avgScore: null,
+            players: [
+                {name: "Tomy", playerID: 987, age: 23},
+                {name: "Pau", playerID: 87, age: 33}
+            ]
+        }
+
+        var appController = {
+            scores: [900, 845, 809, 950],
+            avgScore: null,
+            avg: function () {
+
+                var sumOfScores = this.scores.reduce(function (prev, cur, index, array) {
+                    return prev + cur;
+                });
+
+                this.avgScore = sumOfScores / this.scores.length;
+            }
+        }
+
+        //If we run the code below,
+        //
+        // gameController.avgScore = appController.avg();
+        // 
+        // the gameController.avgScore property will be set to the average score from the appController object scores array
+        // The avg method "this" keyword will not refer to the gameController object, it will refer to the appController object because it is being invoked on appController
+        // Don't run this code, we want the appController.avgScore to remain null
+
+        appController.avg.apply(gameController, gameController.scores);
+
+        // The avgScore property was successfully set on the gameController object, even though we borrowed the avg () method from the appController object
+        console.log(gameController.avgScore); // 46.4 
+        console.log(appController.avgScore);
 
 
     }

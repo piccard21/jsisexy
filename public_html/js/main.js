@@ -13,6 +13,8 @@ require.config({
         e05: "examples/05-oo-closures",
         e06: "examples/06-oo-vererbung",
         e07: "examples/07-oo-callbacks",
+        e08: "examples/08-oo-apply",
+        e09: "examples/09-oo-chainable",
     }
 });
 

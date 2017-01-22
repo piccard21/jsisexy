@@ -154,21 +154,25 @@ define([], function ($, _) {
          * bind ist die allgemeinere Funktion, die z.B. bei Timeouts, Intervallen und Callbacks Verwendung findet. 
          * bindAsEventListener ist die Nutzung einer Funktion als Event-Handler zugeschnitten.
          * */
-        Function.prototype.bind = function () {
-            var method = this;
-            var args = Array.prototype.slice.call(arguments);
-            var object = args.shift();
-            return function () {
-                return method.apply(object, args);
+        if (!Function.prototype.bind) { 
+            Function.prototype.bind = function () {
+                var method = this;
+                var args = Array.prototype.slice.call(arguments);
+                var object = args.shift();
+                return function () {
+                    return method.apply(object, args);
+                };
             };
-        };
+        }
 
-        Function.prototype.bindAsEventListener = function (object) {
-            var method = this;
-            return function (event) {
-                return method.call(object, event || window.event);
-            }
-        };
+        if (!Function.prototype.bindAsEventListener) {
+            Function.prototype.bindAsEventListener = function (object) {
+                var method = this;
+                return function (event) {
+                    return method.call(object, event || window.event);
+                }
+            };
+        }
 
 
 
@@ -245,25 +249,25 @@ define([], function ($, _) {
             var uniqueID = 100;
             for (i = 0; i < theCelebrities.length; i++) {
                 // the j parametric variable is the i passed in on invocation of this IIFE​
-                theCelebrities[i]["id"] = function (j) { 
+                theCelebrities[i]["id"] = function (j) {
                     return function () {
                         // each iteration of the for loop passes the current value of i into this IIFE and it saves the correct value to the array​
-                        return uniqueID + j; 
+                        return uniqueID + j;
                         // BY adding () at the end of this function, we are executing it immediately and returning just the value of uniqueID + j, 
                         // instead of returning a function.​
-                    }() 
+                    }()
                 }(i); // immediately invoke the function passing the i variable as a parameter​
             }
 
             return theCelebrities;
         }
- 
+
 
         createIdForActionCelebs = celebrityIDCreator(actionCelebs);
-        console.log(createIdForActionCelebs);  
+        console.log(createIdForActionCelebs);
 
         var stalloneID = createIdForActionCelebs[0];
-        console.log(stalloneID);  
+        console.log(stalloneID);
         console.log(stalloneID.id); // 100​
 
         var cruiseID = createIdForActionCelebs [1];
