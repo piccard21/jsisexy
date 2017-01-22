@@ -16,20 +16,11 @@ define([
     'e09',
     'e10',
     'e11',
+    'j01'
 ], function ($, _) {
 
     var initialize = function () {
 
-        // chapters
-        $('.chapters li a').click(function (e) {
-            e.preventDefault();
-
-            // call JS
-            JSSEXY[$(this).data("chapter")]();
-
-            // open js-sexy-page
-            window.open($(e.currentTarget).attr('href'), '_blank');
-        });
         
         
         // examples
@@ -38,6 +29,17 @@ define([
 
             // call JS
             JSSEXY[$(this).data("example")](); 
+        });
+        
+        // jquery
+        $('.jquery li a').click(function (e) {
+            e.preventDefault();
+
+            // call JS
+            JSSEXY[$(this).data("jquery")]();
+
+            // open js-sexy-page
+//            window.open($(e.currentTarget).attr('href'), '_blank');
         });
     }
 
