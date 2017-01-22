@@ -139,7 +139,8 @@ define(['jquery', 'underscore'], function ($, _) {
         //
 
         // ---- Fix this when used in a method passed as a callback
-        // We have a simple object with a clickHandler method that we want to use when a button on the page is clicked​
+        // We have a simple object with a clickHandler method that we want to use 
+        // when a button on the page is clicked​
         var user = {
             tournament: "The Masters",
             data: [
