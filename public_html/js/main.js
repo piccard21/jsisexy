@@ -9,6 +9,8 @@ require.config({
         e01: "examples/01-oo-class",
         e02: "examples/02-oo-overwriting",
         e03: "examples/03-oo-kapselung",
+        e04: "examples/04-oo-this",
+        e05: "examples/05-oo-closures",
     }
 });
 
