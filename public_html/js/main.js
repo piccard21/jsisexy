@@ -17,6 +17,7 @@ require.config({
         e09: "examples/09-oo-chainable",
         e10: "examples/10-oo-tips",
         e11: "examples/11-oo-map",
+        e12: "examples/12-oo-all",
         j01: "examples/j01-plugin",
     }
 });
