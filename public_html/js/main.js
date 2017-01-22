@@ -15,6 +15,7 @@ require.config({
         e07: "examples/07-oo-callbacks",
         e08: "examples/08-oo-apply",
         e09: "examples/09-oo-chainable",
+        e10: "examples/10-oo-tips",
     }
 });
 

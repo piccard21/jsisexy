@@ -14,6 +14,7 @@ define([
     'e07',
     'e08',
     'e09',
+    'e10',
 ], function ($, _) {
 
     var initialize = function () {
