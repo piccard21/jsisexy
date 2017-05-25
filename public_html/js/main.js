@@ -1,6 +1,6 @@
 require.config({
     paths: {
-        jquery: "//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min",
+        jquery: "libs/jquery-2.2.4.min",
         underscore: 'libs/underscore/underscore',
         c01: "chapters/01",
         c02: "chapters/02",
